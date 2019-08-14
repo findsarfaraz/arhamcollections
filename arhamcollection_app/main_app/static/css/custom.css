@@ -1,0 +1,166 @@
+.container-fluid {
+	width:90%;
+}
+
+.brand-logo {
+	padding-left: 20px !important;
+	font-family: Mr Dafoe;
+}
+
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+main {
+    flex: 1 0 auto;
+  }
+
+
+ .price  {
+	font-weight: 100;
+	font-size: 23px;
+ 	/*display: inline-block;*/
+ }
+
+ .prev-price {
+ 	color :#78909c;
+ 	text-decoration: line-through;
+	
+ }
+
+.standard-price { 
+	color :black;
+	text-decoration: none;
+	font-weight: 600 !important; 
+	padding-left: 6px;
+	
+ }
+
+ .discount-percentage { 
+	color :#e53935;
+	text-decoration: none;
+	padding-left: 5px;
+ }
+
+
+
+h5#footertitle {
+	color:#424242; !important
+}
+
+#footersocialicon
+{
+	color: #f44336;
+}
+
+#footersocialicon:hover
+{
+	color: #9e9e9e;
+}
+
+
+#footernav {
+	display: inline-block;
+	padding-left: 10px;
+	padding-right: 10px;
+	color:#424242;
+}
+
+a:hover#footernav {
+	color: #9e9e9e;
+}
+
+
+#emailsocialicon:before {
+    font-family: "FontAwesome";
+    content: "\f0e0";
+    display: inline-block;
+    padding-right: 15px;
+    vertical-align: middle;
+    font-size: 28px;
+}
+
+
+#phonesocialicon:before {
+    font-family: "FontAwesome";
+    content: "\f098";
+    display: inline-block;
+    padding-right: 15px;
+    vertical-align: middle;
+    font-size: 30px;
+}
+
+
+
+#faqsocialicon:before {
+    font-family: "FontAwesome";
+    content: "\f059";
+    display: inline-block;
+    padding-right: 15px;
+    vertical-align: middle;
+    font-size: 30px;
+}
+
+#footercontact {
+	color:#424242;
+	font-size:20px;
+
+}
+
+#footercontact:hover {
+	color:#9e9e9e;
+}
+
+.footerlinkheader {
+	font-family: Cambria,Arial;
+	font-size:17px;
+	font-weight:bold;
+	text-transform: uppercase;
+	color:#424242;
+}
+
+#footerlink{
+	font-family: Cambria,Arial;
+	color:black;
+	padding: 5px;
+}
+
+#footerlink:hover {
+	text-decoration: underline;
+}
+
+
+@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
+
+.info-msg,
+.success-msg,
+.warning-msg,
+.error-msg {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 3px 3px 3px 3px;
+}
+.info-msg {
+  color: #059;
+  background-color: #BEF;
+}
+.success-msg {
+  color: #270;
+  background-color: #DFF2BF;
+}
+.warning-msg {
+  color: #9F6000;
+  background-color: #FEEFB3;
+}
+.error-msg {
+  color: #D8000C;
+  background-color: #FFBABA;
+}
+
+
+label[data-error]:after {
+    white-space: nowrap;
+}

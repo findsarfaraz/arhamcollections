@@ -1,0 +1,100 @@
+				      
+<div class="navbar-fixed">
+	<div class="row">
+		<nav>
+			<div class="nav-wrapper">
+					<ul class="left">
+						<li>
+							<a href="#" class="brand-logo">arhamcollections</a>
+						</li>
+					</ul>
+					<ul class="left">
+						<a href="#" data-target="mobile-demo1" class="sidenav-trigger"><i class="material-icons">apps</i></a>
+					</ul>
+					<ul class="right">	
+						<li><a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="large material-icons">menu</i></a></li>
+					</ul>
+					<div class="hide-on-med-and-down">		
+						<ul id="nav-mobile" class="right">
+							{% if current_user.is_anonymous %}
+								<li class="hide-on-med-and-down"><a href="{{url_for('user_management.signup') }}">Sign Up</a></li>
+				        		<li><a href="{{url_for('user_management.login') }}">Login</a></li>
+				        	{% else %}
+				        	 <!--    <li><a class="dropdown-button" href="" data-beloworigin="true" data-target="dropdown1">{{current_user.get_name()}}<i class="material-icons right">arrow_drop_down</i></a></li> -->
+				        		<li> <a class='dropdown-trigger' href='#' data-beloworigin="true" data-target='dropdown1'>{{current_user.get_name()}}<i class="material-icons right">arrow_drop_down</i></a></li>
+
+
+				        	{% endif %}
+						</ul>
+					</div>
+			        <ul class="right">
+							<li><a href="#" id="searchicon"><i class="material-icons">search</i></a><li>
+							<li><a href="#"><i class="material-icons">shopping_cart</i></a></li>
+					</ul>
+				</div>
+		</nav>
+	</div>
+</div>
+	<nav class="white hide" id ="searchbar">
+		<div class="nav-wrapper white">
+				<form>
+		        <div class="input-field" id="searchfield">
+		          <input id="search" type="search" required>
+		          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+		          <i class="material-icons"><a href="#" id="test" class="black-text">close</a></i>
+		        </div>
+		      </form>
+		</div>
+	</nav>
+
+<div>
+
+
+<ul id="dropdown1" class="dropdown-content">
+  <li><a href={{url_for('user_management.edituserprofile') }}>Your Profile</a></li>
+  <li><a href="">Your addresses</a></li>
+   <li><a href={{url_for('user_management.changepassword') }}>Change Password</a></li>
+  <li><a href="">Wish list</a></li>
+  <!-- {%if current_user.userrole=='Admin'%} -->
+  <!-- <li><a href={{ url_for('product_management.addmenu') }}>Add Menu</a></li> -->
+   <!-- <li><a href={{ url_for('main_app.admin') }}>Admin</a></li> -->
+  <!-- {%endif%} -->
+  <li><a href="#!">Your Orders</a></li>
+  <li><a href={{ url_for('user_management.logout') }}>Log Out</a></li>
+</ul>
+</div>
+					        	   	
+
+
+
+   
+{# Grey nav bar #}
+<nav class="grey lighten-5 hide-on-med-and-down">
+	<div class="nav-wrapper">
+			<ul class="left">
+				<li><a href="" class="red-text text-darken-1">Fashion</a></li>
+				<li><a href="" class="red-text text-darken-1">Jewellery</a></li>
+				<li><a href="" class="red-text text-darken-1">Footwear</a></li> 
+			</ul>
+	</div>
+ </nav>
+
+ <ul class="sidenav" id="mobile-demo">
+	<li><a href="{{url_for('user_management.login') }}">Login</a></li>
+	<li><a href="{{url_for('user_management.signup') }}">Sign Up</a></li>
+    <!-- <<li><a href=""><i class="fas fa-shopping-cart fa-2x"></i></a></li> -->
+ </ul>
+
+
+ <ul class="sidenav" id="mobile-demo1">
+		<li><a href="sass.html" class="red-text text-darken-1">Fashion</a></li>
+		<li><a href="" class="red-text text-darken-1">Jewellery</a></li>
+		<li><a href="" class="red-text text-darken-1">Footwear</a></li> 
+    <!-- <<li><a href=""><i class="fas fa-shopping-cart fa-2x"></i></a></li> -->
+ </ul>
+
+
+
+
+
+

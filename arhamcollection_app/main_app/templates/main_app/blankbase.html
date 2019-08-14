@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	 <link href="{{ url_for('main_app.static',filename='css/materialize.min.css') }}" rel="stylesheet">
+	 <link href="{{ url_for('main_app.static',filename='css/fontawesome.min.css') }}" rel="stylesheet">
+	 <link href="{{ url_for('main_app.static',filename='css/custom.css') }}" rel="stylesheet">
+	 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+		
+</head>
+<body class="red darken-1">
+<main>
+
+
+<div class="container">
+    {% block content%}
+
+
+
+    {% endblock %}
+	
+</div>
+</main>
+
+
+{%block endjs%}
+
+<script  type="text/javascript" src="{{ url_for('main_app.static',filename='js/jquery.min.js')}}"></script>
+<script  type="text/javascript" src="{{ url_for('main_app.static',filename='js/materialize.min.js')}}"></script>
+<script  type="text/javascript" src="{{ url_for('main_app.static',filename='js/fontawesome-all.js')}}"></script>
+<script  type="text/javascript" src="{{ url_for('main_app.static',filename='js/custom.js')}}"></script>
+<script>$(".button-collapse").sideNav();</script>
+
+
+ {%endblock%}
+
+
+</body>
+</html>

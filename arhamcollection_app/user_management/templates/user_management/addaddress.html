@@ -1,0 +1,149 @@
+
+{%extends 'main_app/base.html' %}
+
+{% block content %}
+       
+<div class="row">
+	<div class="row">
+		<div class="card-panel grey lighten-2 col s12 m8 l6 offset-l3 m2">
+			<span class="red-text"><h5>Add Address{{form.landmark.data}}</h5>
+			</span>
+		</div>
+	</div>
+	<form  method="POST">
+		<div class="row">
+			<div class="row">
+				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+				<div class="input-field col s12 m8 l6 offset-l3 m2">
+					<input id="first_name"  type="text" name="first_name" class="validate" value={%if address_id==None%}{{""}}{%else%}"{{form.first_name.data}}"{%endif%}>
+					<label for="first_name" >First Name</label>
+				</div
+			</div>
+			<div class="row">	
+				<div class="input-field col s12 m8 l6 offset-l3 m2">
+					<input id="last_name"   type="text" name="last_name" class="validate" value={%if address_id==None%}{{""}}{%else%}"{{form.last_name.data}}"{%endif%} >
+					<label for="last_name" >Last Name</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12 m8 l6 offset-l3 m2">
+					<input id="landmark"  type="text" name="landmark" class="validate" value={%if address_id==None%}{{""}}{%else%}"{{form.landmark.data}}"{%endif%}>
+					<label for="landmark">Landmark</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12 m8 l6 offset-l3 m2">
+					<input id="address1" type="text" name="address1" class="validate" value={%if address_id==None%}{{""}}{%else%}"{{form.address1.data}}"{%endif%}>
+					<label for="address1">Address</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12 m8 l6 offset-l3 m2">
+					<input id="address2" type="text" name="address2" class="validate" value={%if address_id==None%}{{""}}{%else%}"{{form.address2.data}}"{%endif%}>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12 m8 l6 offset-l3 m2">
+					<input id="state" type="text" name="state" class="validate" value={%if address_id==None%}{{""}}{%else%}"{{form.state.data}}"{%endif%}>
+					<label for="state">State</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12 m8 l6 offset-l3 m2">
+					<input id="city" type="text" name="city" class="validate" value={%if address_id==None%}{{""}}{%else%}"{{form.city.data}}"{%endif%}>
+					<label for="city">City</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12 m8 l6 offset-l3 m2">
+					<input id="pincode" type="text" name="pincode" class="validate" value={%if address_id==None%}{{""}}{%else%}"{{form.pincode.data}}"{%endif%}>
+					<label for="pincode">Pincode</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12 m8 l6 offset-l3 m2">
+					<input id="mobileno" type="text" name="mobileno" class="validate" value={%if address_id==None%}{{""}}{%else%}"{{form.mobileno.data}}"{%endif%}>
+					<label for="mobileno">Mobile No</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12 m8 l6 offset-l3 m2">
+					<input type="checkbox"  id="default_flag" name="default_flag" {%if form.default_flag.data==True%}{{'checked=checked'}}{%endif%}/>
+		      		<label for="default_flag">Set Default</label>
+		      	</div>
+      		</div>
+
+      		<div class="row">
+				<div class="input-field col s12 m8 l6 offset-l3 m2">
+					<button type="submit" class="waves-effect waves-light btn-large col s12">Save</button>
+				</div>
+			</div>
+		</div>
+
+	</form>
+	<div class="col s12 m8 l6 offset-l3 m2">
+		<div class="row">
+			<div class="row" id ="success">
+				 <div class="success-msg">
+					
+				 </div>					 
+			</div>
+			<div class="row" id ="error">
+				 <div class="error-msg">
+					
+				 </div>					 
+			</div>
+		</div>
+	</div>	
+
+</div>
+
+
+{% endblock %}
+
+
+
+{% block endjs%}
+{{super()}}
+<script>
+$(document).ready(function(event)
+	{
+	$('#success').hide()
+	$('#error').hide()
+	var url;
+	url = "{{ url_for('user_management.addaddress',address_id=address_id)}}";
+	
+		$('form').on('submit',function(event)
+		{
+		// $('#first_name').removeClass('invalid');
+		// $('#first_name').removeAttr( "aria-invalid" )
+		// $('#last_name').removeClass('invalid');
+		// $('#last_name').removeAttr( "aria-invalid" )
+		$.ajax({
+				type:"POST",
+				url:url,
+				data:$('form').serialize(),
+				})
+		.done(function(data){
+					
+					ShowMessage(data);
+					if (data.fielderror)
+						{
+						$.each(data.fielderror,function(datakey,datavalue){
+							$('form input').each(function(key,value){
+								if (this.id==datakey){
+									$('label[for="'+datakey +'"]').attr('data-error',datavalue);
+									$(this).addClass('invalid');
+									$(this).prop('aria-valid',"true");
+									$('label[for="'+datakey +'"]').addClass('active');
+									}
+							});    
+						});
+						}
+							});
+	event.preventDefault();
+	});
+});
+</script>
+
+{% endblock %}

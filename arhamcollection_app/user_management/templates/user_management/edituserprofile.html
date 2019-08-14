@@ -1,0 +1,124 @@
+{%extends 'main_app/base.html' %}
+{% block content%}
+<div class="row">
+	<div class="row">
+		<div class="section col s12 m8 l6 offset-l3 m2">
+			<span class="red-text"><h5>Your Profile</h5>
+			</span>
+		</div>
+	</div>
+	<div class="divider"></div>
+	<div class="section">
+	<form method="POST">
+		<div class="row">
+			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+			<div class="row">
+				<div class="input-field col s12 m8 l6 offset-l3 m2">
+					<input id="first_name" type="text"  name="first_name" value="{{form.first_name.data}}">
+					<label for="first_name">First Name</label>
+				</div>
+			</div>
+			<div class="row">	
+				<div class="input-field col s12 m8 l6 offset-l3 m2">
+					<input id="last_name" type="text" name="last_name" value="{{form.last_name.data}}">
+					<label for="last_name">Last Name</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12 m8 l4 offset-l3 m2">
+					<select id="gender" name="gender" value={{form.gender.data}}>>
+						<option value="" disable selected>Select Gender</option>
+						<option value="female" {%if form.gender.data=="female"%}{{"selected"}}{% endif%}>Female</option>
+						<option value="male" {%if form.gender.data=="male"%}{{"selected"}}{% endif%}>Male</option>
+					</select>
+					<label>Gender</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12 m8 l6 offset-l3 m2">
+					<input id="mobile_number" type="text" class="validate" name="mobile_number" value="{{form.mobile_number.data}}">
+					<label for="mobile_number">Moblie Number</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12 m8 l6 offset-l3 m2">
+					<!-- {{form.dateofbirth(class="datepicker") }} -->
+					<input id="dateofbirth" name="dateofbirth" type="date" class="datepicker" value="{{form.dateofbirth.data}}">
+					<label for="dateofbirth">Date of Birth</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12 m8 l6 offset-l3 m2">
+					<button type="submit" class="waves-effect waves-light btn-large col s12">Save</button>
+				</div>
+			</div>
+		</div>
+	</form>
+	</div>
+	<div class="col s12 m8 l6 offset-l3 m2">
+		<div class="row">
+			<div class="row" id ="success">
+				 <div class="success-msg">
+					
+				 </div>					 
+			</div>
+			<div class="row" id ="error">
+				 <div class="error-msg">
+					
+				 </div>					 
+			</div>
+		</div>
+	</div>	
+</div>
+	
+
+
+{% endblock %}
+
+
+
+
+{% block endjs%}
+{{super()}}
+<script>
+$(document).ready(function(event)
+	{
+	$('#success').hide()
+	$('#error').hide()
+	var url;
+	url = "{{ url_for('user_management.edituserprofile')}}";
+	
+		$('form').on('submit',function(event)
+		{
+		// $('#first_name').removeClass('invalid');
+		// $('#first_name').removeAttr( "aria-invalid" )
+		// $('#last_name').removeClass('invalid');
+		// $('#last_name').removeAttr( "aria-invalid" )
+		$.ajax({
+				type:"POST",
+				url:url,
+				data:$('form').serialize(),
+				})
+		.done(function(data){
+					
+					ShowMessage(data);
+					if (data.fielderror)
+						{
+						$.each(data.fielderror,function(datakey,datavalue){
+							$('form input').each(function(key,value){
+								if (this.id==datakey){
+									$('label[for="'+datakey +'"]').attr('data-error',datavalue);
+									$(this).addClass('invalid');
+									$(this).prop('aria-valid',"true");
+									$('label[for="'+datakey +'"]').addClass('active');
+									}
+							});    
+						});
+						}
+							});
+	event.preventDefault();
+	});
+});
+</script>
+
+{% endblock%}

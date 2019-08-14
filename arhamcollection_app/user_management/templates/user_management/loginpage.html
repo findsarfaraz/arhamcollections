@@ -1,0 +1,107 @@
+{%extends 'main_app/blankbase.html' %}
+{% block content%}
+
+<div class="row">
+	<div class="col s12 m2 l3">
+	</div>
+	<div class="col s12 m8 l6">
+		<div class="row">
+		<div class="valign-wrapper">
+			<div class="card-panel z-depth-4">
+				<div class="row">
+					<h5 class="center-align"><a href={{ url_for('main_app.home') }}>Arhamcollections</a>, Welcomes you...</h5>
+					<form class ="col s12" method="POST">
+						<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+						<div class="input-field col s12">
+							<input id="email" type="text" name ="email" class="validate">
+							<label for="email">Email</label>
+						</div>
+						<div class="input-field col s12">
+							<input id="password"  class="validate" name="password" type="password">
+							<label for="password">Password</label>
+						</div>
+						<div>
+							<div class="center-align"><a href={{ url_for('user_management.forgotpassword') }}>Forgot password</a></div>
+						</div>
+						<div class="input-field col s12">
+							<button type="submit" class="waves-effect waves-light btn-large col s12">Login</button>
+						</div>
+						
+					</form>
+				</div>
+				<div>
+
+
+					<div class="row">
+						<div class="row" id ="success">
+							<div class="success-msg">
+
+							</div>					 
+						</div>
+						<div class="row" id ="error">
+							<div class="error-msg">
+
+							</div>					 
+						</div>
+					</div>
+
+
+
+					<p> You missed to create account with us, Just click on <emp><a href={{ url_for('user_management.signup') }}>Signup </a></emp></p>
+					
+				</div>
+			</div>
+			
+		</div>
+		</div>
+	</div>
+	<div class="col s12 m2 l3">
+	</div>
+</div>
+
+{% endblock %}
+
+
+
+{% block endjs%}
+{{super()}}
+<script>
+$(document).ready(function(event){
+	$('#success').hide()
+	$('#error').hide()
+	var url;
+	url = "{{ url_for('user_management.login')}}";
+	
+	$('form').on('submit',function(event){
+		$.ajax({
+			type:"POST",
+			url:url,
+			data:$('form').serialize(),
+		})
+		.done(function(data){
+						ShowMessage(data);
+						if (data.fielderror)
+						{
+						$.each(data.fielderror,function(datakey,datavalue){
+							$('form input').each(function(key,value){
+								if (this.id==datakey){
+									$('label[for="'+datakey +'"]').attr('data-error',datavalue);
+									$(this).addClass('invalid');
+									$(this).prop('aria-valid',"true");
+									$('label[for="'+datakey +'"]').addClass('active');
+									}
+							});    
+						});
+						}
+		});
+	event.preventDefault();
+	});
+});
+</script>
+
+{% endblock%}
+
+
+
+
+
